@@ -1,0 +1,14 @@
+{
+    "user": {
+        "username": "thenil3sh"
+    },
+    "subdomain": "nilesh",
+    "records": [
+        {
+            "type": "TXT",
+            "name": "_discord.nilesh.is-an-ai.dev",
+            "value": "dh=a949528114c92fa8c0db0e9b459b093cce74a518",
+            "proxied": false
+        }
+    ]
+}
