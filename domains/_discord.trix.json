@@ -1,0 +1,13 @@
+{
+    "user": {
+        "username": "tr1x_em"
+    },
+    "subdomain": "_discord.trix",
+    "records": [
+        {
+            "type": "TXT",
+            "value": "dh=b201cefaf465a057236b41addb07a4e4960022d0",
+            "proxied": false
+        }
+    ]
+}
