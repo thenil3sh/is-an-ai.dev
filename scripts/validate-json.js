@@ -98,6 +98,11 @@ if (files.length === 0) {
 for (const file of files) {
     let data;
 
+    // First, check if the file exists
+    if (!fs.existsSync(file)) {
+        continue;
+    }
+
     // parse JSON
     try {
         data = JSON.parse(fs.readFileSync(file, "utf8"));
