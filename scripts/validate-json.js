@@ -14,6 +14,19 @@ const ALLOWED_TYPES = [
     "TLSA",
 ];
 
+const RESERVED_JSON_PATH = "./reserved-subdomains.json";
+let RESERVED_SUBDOMAINS = [];
+
+try {
+    const reservedData = JSON.parse(fs.readFileSync(RESERVED_JSON_PATH, "utf8"));
+    // Flatten all categories into one flat array of strings
+    RESERVED_SUBDOMAINS = Object.values(reservedData)
+        .filter(val => Array.isArray(val))
+        .flat();
+} catch (err) {
+    console.error("⚠️ Warning: Could not load reserved-subdomains.json. Skipping reserved check.");
+}
+
 // required and allowed top-level keys
 const REQUIRED_TOP_KEYS = ["user", "subdomain", "records"];
 const ALLOWED_TOP_KEYS = ["user", "description", "subdomain", "records"];
@@ -116,9 +129,14 @@ for (const file of files) {
         }
     }
 
-    // validate subdomain
+    // Validate subdomain
     if (!/^[a-z0-9-]+$/.test(data.subdomain)) {
         fail(`${file}: invalid subdomain format`);
+    }
+
+    // Check if subdomain is not reserved
+    if (RESERVED_SUBDOMAINS.includes(data.subdomain.toLowerCase())) {
+        fail(`${file}: the subdomain "${data.subdomain}" is reserved and cannot be registered`);
     }
 
     // filename must match subdomain
