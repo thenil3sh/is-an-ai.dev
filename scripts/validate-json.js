@@ -10,7 +10,7 @@ const ALLOWED_TYPES = [
     "MX",
     "SRV",
     "CAA",
-    "NS", // Added NS
+    "NS",
     "DS",
     "TLSA",
 ];
